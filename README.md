@@ -27,6 +27,26 @@ In `Sheet2`, fill as below:
 
 > (You can update prices later from the Update Price Form.)
 
+### Sample Data Structure
+
+#### Sheet1 (Shift Entries) Sample:
+
+| Date       | Time     | Person Name | Meter No        | Product | Start Reading | End Reading | Testing Fuel | Price | Gross Liters | Net Liters | Total   |
+|:-----------|:---------|:------------|:----------------|:--------|:--------------|:------------|:-------------|:------|:-------------|:-----------|:--------|
+| 2023-10-15 | 08:00:00 | John Doe    | Machine1-Nozzle1| Petrol  | 10500.50      | 11000.50    | 2.5          | 105   | 500.00       | 497.50     | 52237.50|
+| 2023-10-15 | 16:00:00 | Jane Smith  | Machine2-Nozzle2| Diesel  | 8200.75       | 8500.25     | 1.0          | 96    | 299.50       | 298.50     | 28656.00|
+| 2023-10-16 | 08:00:00 | Mike Johnson| Machine3-Nozzle3| XP95    | 5000.00       | 5200.00     | 0.5          | 110   | 200.00       | 199.50     | 21945.00|
+
+#### Sheet2 (Product Prices) Sample:
+
+| Product | Price |
+|:--------|:------|
+| Petrol  | 105   |
+| Diesel  | 96    |
+| XP95    | 110   |
+
+> (You can update prices later from the Update Price Form.)
+
 ---
 
 ### 3. Open Apps Script

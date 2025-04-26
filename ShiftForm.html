@@ -73,6 +73,9 @@
   <label>End Reading:</label><br>
   <input type="number" name="endReading" id="endReading" step="0.01" required><br>
 
+  <label>Testing Fuel (Liters):</label><br>
+  <input type="number" name="testingFuel" id="testingFuel" step="0.01" value="0"><br>
+
   <input type="submit" value="Submit">
 </form>
 
@@ -114,6 +117,7 @@
       product: form.product.value,
       startReading: form.startReading.value,
       endReading: form.endReading.value,
+      testingFuel: form.testingFuel.value || "0",
       price: form.price.value
     };
 

@@ -31,8 +31,13 @@ function showShiftDialog() {
 
 function saveShiftData(data) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Sheet1");
-  const liters = parseFloat(data.endReading) - parseFloat(data.startReading);
-  const total = liters * parseFloat(data.price);
+  const grossLiters = parseFloat(data.endReading) - parseFloat(data.startReading);
+  const testingFuel = parseFloat(data.testingFuel) || 0;
+  const netLiters = grossLiters - testingFuel;
+  const total = netLiters * parseFloat(data.price);
+
+  // Append the row
+  const newRow = sheet.getLastRow() + 1;
   sheet.appendRow([
     data.shiftDate,    // First column
     data.shiftTime,    // Second column
@@ -41,10 +46,17 @@ function saveShiftData(data) {
     data.product,
     data.startReading,
     data.endReading,
+    data.testingFuel,  // Testing fuel
     data.price,
-    liters,
+    grossLiters,       // Gross liters
+    netLiters,         // Net liters (after subtracting testing fuel)
     total
   ]);
+
+  // Format the numeric columns to ensure they display as numbers
+  sheet.getRange(newRow, 10).setNumberFormat("0.00"); // Gross liters column
+  sheet.getRange(newRow, 11).setNumberFormat("0.00"); // Net liters column
+  sheet.getRange(newRow, 12).setNumberFormat("0.00"); // Total column
 }
 
 
