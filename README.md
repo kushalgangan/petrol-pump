@@ -1,7 +1,3 @@
-Of course! Here’s a clean `README.md` you can use:
-
----
-
 # ⛽ Petrol Pump Shift Entry - Google Sheets App
 
 This Google Apps Script project allows pump operators or managers to:
