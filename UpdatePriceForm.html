@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base target="_top">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 6px;
+            margin: 6px 0 12px 0;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<h3>Update Product Price</h3>
+<form id="updatePriceForm">
+    <label>Product Type:</label><br>
+    <select name="product" required>
+        <option>Petrol</option>
+        <option>Diesel</option>
+        <option>XP95</option>
+    </select><br>
+
+    <label>Current Price:</label><br>
+    <input type="number" id="currentPrice" disabled><br>
+
+    <label>New Price per Liter:</label><br>
+    <input type="number" name="newPrice" id="newPrice" step="0.01" required><br>
+
+    <input type="submit" value="Update Price">
+</form>
+
+<script>
+    // Fetch the current prices from the Google Sheet
+    google.script.run.withSuccessHandler(function(prices) {
+        const productSelect = document.getElementById('product');
+        const currentPriceInput = document.getElementById('currentPrice');
+
+        // Set the current price when the product is selected
+        productSelect.addEventListener('change', function() {
+            currentPriceInput.value = prices[productSelect.value] || '';
+        });
+
+        // Set initial price
+        currentPriceInput.value = prices[productSelect.value] || '';
+    }).getProductPrices();
+
+    document.getElementById("updatePriceForm").onsubmit = function(e) {
+        e.preventDefault();
+        const form = e.target;
+        const data = {
+            product: form.product.value,
+            newPrice: form.newPrice.value
+        };
+        google.script.run
+            .withSuccessHandler(() => {
+                alert("Product price updated successfully!");
+                google.script.host.close();
+            })
+            .updateProductPrice(data);
+    };
+</script>
+</body>
+</html>
