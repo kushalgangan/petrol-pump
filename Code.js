@@ -72,7 +72,17 @@ function getProductPrice(product) {
   return 0;
 }
 
+function getMachineProduct(machine) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Sheet3");
+  const data = sheet.getDataRange().getValues();
 
+  for (let i = 0; i < data.length; i++) {
+    if (data[i][0] === machine) {
+      return data[i][1]; // returns the product
+    }
+  }
+  return ""; // Return empty string if no mapping found
+}
 
 function showUpdatePriceDialog() {
   const html = HtmlService.createHtmlOutputFromFile('UpdatePriceForm')

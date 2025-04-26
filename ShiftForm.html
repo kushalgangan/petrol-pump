@@ -41,7 +41,8 @@
   <input type="text" name="personName"><br>
 
   <label>Machine Nozzle:</label><br>
-  <select name="meterNo" required>
+  <select name="meterNo" id="machineSelect" required>
+    <option value="">Select Machine</option>
     <option value="Machine1-Nozzle1">Machine1 - Nozzle1</option>
     <option value="Machine1-Nozzle2">Machine1 - Nozzle2</option>
     <option value="Machine1-Nozzle3">Machine1 - Nozzle3</option>
@@ -83,6 +84,21 @@
   // Auto set today's date and time
   document.getElementById("shiftDate").valueAsDate = new Date();
   document.getElementById("shiftTime").value = new Date().toLocaleTimeString('en-GB', {hour: '2-digit', minute:'2-digit'});
+
+  // Auto-populate product based on machine selection
+  document.getElementById("machineSelect").addEventListener("change", function() {
+    const machine = this.value;
+    if (machine) {
+      google.script.run.withSuccessHandler(function(product) {
+        const productSelect = document.getElementById("productSelect");
+        productSelect.value = product;
+
+        // Trigger the change event to update the price
+        const event = new Event('change');
+        productSelect.dispatchEvent(event);
+      }).getMachineProduct(machine);
+    }
+  });
 
   // Fetch price from server when product changes
   document.getElementById("productSelect").addEventListener("change", function() {

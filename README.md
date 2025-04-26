@@ -12,11 +12,14 @@ This Google Apps Script project allows pump operators or managers to:
 
 ### 1. Prepare Your Google Sheet
 - Create a **new Google Sheet**.
-- Create two sheets inside it:
+- Create three sheets inside it:
     - `Sheet1`: For **Shift Entries** (Main data).
     - `Sheet2`: For **Product Prices** (Maintain latest prices).
+    - `Sheet3`: For **Machine-Product Mapping** (Maps machines to their product types).
 
-### 2. Add Initial Data to Sheet2
+### 2. Add Initial Data to Sheets
+
+#### Sheet2 (Product Prices)
 In `Sheet2`, fill as below:
 
 | Product | Price |
@@ -26,6 +29,26 @@ In `Sheet2`, fill as below:
 | XP95    | 110   |
 
 > (You can update prices later from the Update Price Form.)
+
+#### Sheet3 (Machine-Product Mapping)
+In `Sheet3`, fill as below:
+
+| Machine          | Product |
+|:-----------------|:--------|
+| Machine1-Nozzle1 | Diesel  |
+| Machine1-Nozzle2 | Diesel  |
+| Machine1-Nozzle3 | Petrol  |
+| Machine1-Nozzle4 | Petrol  |
+| Machine2-Nozzle1 | Diesel  |
+| Machine2-Nozzle2 | Diesel  |
+| Machine2-Nozzle3 | Petrol  |
+| Machine2-Nozzle4 | Petrol  |
+| Machine3-Nozzle1 | XP95    |
+| Machine3-Nozzle2 | XP95    |
+| Machine3-Nozzle3 | Petrol  |
+| Machine3-Nozzle4 | Petrol  |
+
+> (This mapping is used to auto-populate the product type when a machine is selected in the Shift Form.)
 
 ### Sample Data Structure
 
@@ -46,6 +69,25 @@ In `Sheet2`, fill as below:
 | XP95    | 110   |
 
 > (You can update prices later from the Update Price Form.)
+
+#### Sheet3 (Machine-Product Mapping) Sample:
+
+| Machine          | Product |
+|:-----------------|:--------|
+| Machine1-Nozzle1 | Diesel  |
+| Machine1-Nozzle2 | Diesel  |
+| Machine1-Nozzle3 | Petrol  |
+| Machine1-Nozzle4 | Petrol  |
+| Machine2-Nozzle1 | Diesel  |
+| Machine2-Nozzle2 | Diesel  |
+| Machine2-Nozzle3 | Petrol  |
+| Machine2-Nozzle4 | Petrol  |
+| Machine3-Nozzle1 | XP95    |
+| Machine3-Nozzle2 | XP95    |
+| Machine3-Nozzle3 | Petrol  |
+| Machine3-Nozzle4 | Petrol  |
+
+> (This mapping is used to auto-populate the product type when a machine is selected in the Shift Form.)
 
 ---
 
@@ -95,7 +137,7 @@ In Apps Script:
 To lock sheets programmatically:
 - Use the locking logic provided (`protect()`).
 - Only allow script to edit the data.
-- Editors will **not** be able to manually edit `Sheet1` or `Sheet2` unless given permission.
+- Editors will **not** be able to manually edit `Sheet1`, `Sheet2`, or `Sheet3` unless given permission.
 
 ---
 
